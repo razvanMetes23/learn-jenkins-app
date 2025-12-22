@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-        /*
 
         stage('Build') {
             agent {
@@ -22,7 +21,6 @@ pipeline {
                 '''
             }
         }
-        */
 
         stage('Tests') {
             parallel {
@@ -39,6 +37,11 @@ pipeline {
                             #test -f build/index.html
                             npm test
                         '''
+                    }
+                    post {
+                        always {
+                            #junit 'jest-results/junit.xml'
+                        }
                     }
                 }
 
@@ -77,11 +80,10 @@ pipeline {
             }
             steps {
                 sh '''
-                    npm install netlify-cli@20.1.1
+                    npm install netlify-cli
                     node_modules/.bin/netlify --version
                 '''
             }
         }
     }
 }
-
