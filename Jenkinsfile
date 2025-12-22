@@ -38,11 +38,6 @@ pipeline {
                             npm test
                         '''
                     }
-                    post {
-                        always {
-                            
-                        }
-                    }
                 }
 
                 stage('E2E') {
