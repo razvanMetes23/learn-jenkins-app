@@ -86,10 +86,10 @@ pipeline {
             }
             steps {
                 sh '''
-                    netlify --version
+                    netlify-cli@20.1.1 --version
                     echo "Deploying to staging. Site ID: $NETLIFY_SITE_ID"
-                    netlify status
-                    netlify deploy --dir=build --json > deploy-output.json
+                    netlify-cli@20.1.1 status
+                    netlify-cli@20.1.1 deploy --dir=build --json > deploy-output.json
                 '''
                 script {
                     env.STAGING_URL = sh(script: "node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout: true)
@@ -140,10 +140,10 @@ pipeline {
             steps {
                 sh '''
                     node --version
-                    netlify --version
+                    netlify-cli@20.1.1 --version
                     echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
-                    netlify status
-                    netlify deploy --dir=build --prod
+                    netlify-cli@20.1.1 status
+                    netlify-cli@20.1.1 deploy --dir=build --prod
                 '''
             }
         }
